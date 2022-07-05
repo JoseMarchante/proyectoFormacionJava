@@ -19,6 +19,7 @@ public class Superheroe {
 	
 	private Long id;
 	private String nombre;
+	private boolean estado;
 	private List<PoderSuperheroe> poder;
 	private Universo universo;
 	
@@ -45,6 +46,11 @@ public Superheroe() {}
 		this.nombre=nombre;
 	}
 	
+	@Column(name = "estado", nullable = false)
+	public boolean getEstado() {
+		return estado;
+	}
+	
 	@OneToMany()
 	@JoinColumn(name = "id_poder")
 	public List<PoderSuperheroe> getPoder() {
@@ -63,6 +69,10 @@ public Superheroe() {}
 
 	public void setUniverso(Universo universo) {
 		this.universo = universo;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 	
 	
