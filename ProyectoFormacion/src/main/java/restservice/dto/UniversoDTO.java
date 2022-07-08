@@ -2,11 +2,19 @@ package restservice.dto;
 
 import java.io.Serializable;
 
+import restservice.model.Universo;
+
 public class UniversoDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	private String nombre;
+	
+	public UniversoDTO() {}
+	
+	public UniversoDTO(Universo universo) {
+		this.nombre=universo.getNombre();
+	}
 	
 	public UniversoDTO(String nombre) {
 		this.nombre=nombre;
@@ -19,8 +27,10 @@ public class UniversoDTO implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+
 	@Override
 	public String toString() {
-		return "UniversoDTO [nombre="+ nombre +"]";
+		return "Universo [nombre="+ nombre +"]";
 	}
 }
