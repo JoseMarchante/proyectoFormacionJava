@@ -25,7 +25,7 @@ public class UniversoServiceImpl implements UniversoService {
 
 	@Override
 	public List<Universo> findAllUniversos() throws ResourceNotFoundException {
-		List<Universo> universos = (List<Universo>) repository.findAll();
+		List<Universo> universos = repository.findAll();
 		if(universos.isEmpty()) {
 			throw new ResourceNotFoundException("No existen universos en la base de datos");
 		}
@@ -33,16 +33,21 @@ public class UniversoServiceImpl implements UniversoService {
 	}
 
 	@Override
-	public void deleteUniverso(Long id_universo) {
+	public void deleteUniverso(Integer id_universo) throws ResourceNotFoundException{
 		if (repository.existsById(id_universo)) {
 			repository.deleteById(id_universo);
 		}
 		
 	}
+	
+	@Override
+	public Optional<Universo> findUniverso(Integer id) throws ResourceNotFoundException {
+		return repository.findById(id);
+	}
 
 	@Override
-	public Optional<Universo> findUniverso(Long id) throws ResourceNotFoundException {
-		return repository.findById(id);
+	public Universo findByNombre(String nombre) throws ResourceNotFoundException{
+		return repository.findByNombre(nombre);
 	}
 
 }
