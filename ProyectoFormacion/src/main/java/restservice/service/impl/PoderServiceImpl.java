@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import restservice.exception.ResourceNotFoundException;
 import restservice.model.Poder;
 import restservice.repository.PoderRepository;
 import restservice.service.PoderService;
 
+@Service
 public class PoderServiceImpl implements PoderService{
 
 	@Autowired
@@ -21,7 +23,7 @@ public class PoderServiceImpl implements PoderService{
 	}
 
 	@Override
-	public void deletePoder(Long id_poder) {
+	public void deletePoder(Integer id_poder)throws ResourceNotFoundException {
 		if (repository.existsById(id_poder)) {
 			repository.deleteById(id_poder);
 		}
@@ -30,7 +32,7 @@ public class PoderServiceImpl implements PoderService{
 
 	@Override
 	public List<Poder> findAllPoderes() throws ResourceNotFoundException {
-		List<Poder> poderes = (List<Poder>) repository.findAll();
+		List<Poder> poderes =repository.findAll();
 		if(poderes.isEmpty()) {
 			throw new ResourceNotFoundException("No existen poderes en la base de datos");
 
@@ -39,8 +41,14 @@ public class PoderServiceImpl implements PoderService{
 	}
 
 	@Override
-	public Optional<Poder> findPoder(Long id) throws ResourceNotFoundException {
+	public Optional<Poder> findPoder(Integer id) throws ResourceNotFoundException {
 		return repository.findById(id);
 	}
+
+	@Override
+	public Poder findByNombre(String nombre) throws ResourceNotFoundException {
+		return repository.findByNombre(nombre);
+	}
+
 
 }
